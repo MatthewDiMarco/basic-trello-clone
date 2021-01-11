@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  background-image: linear-gradient(120deg, #6fe0f9 0%, #85fde9 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  cursor: default;
+  overflow-y: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(228, 228, 228);
+  border: solid 3px rgb(228, 228, 228);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(187, 187, 187);
+  border: solid 3px rgb(228, 228, 228);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(180, 180, 180);
+}
+
+.container-horizontal {
+  display: flex; 
+}
+
+.container-vertical {
+  display: auto;
+}
+
+.draggable {
+  cursor: pointer;
+}
+
+.draggable.dragging {
+  color: transparent; /*text invisible*/;
+  opacity: 0.4;
+}
+
+.drag-ghost {
+  transform: rotate(3deg);
+  pointer-events: none;
+}
+
+.topbar {
+  width: 100vw;
+  height: 50px;
+}
+
+.board-content {
+  white-space: nowrap;
+}
+
+.listwrapper {
+  height: 100vh;
+}
+
+.list-content {
+  background-color: rgb(228, 228, 228);
+  border-radius: 2%;
+  padding: 0.4rem;
+  margin-left: 0.4rem;
+  box-shadow: 0 1px 1px #888888;
+}
+
+.list-header {
+  padding: 0.5rem;
+}
+
+.list-cards {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 75vh;
+  min-height: 14vh;
+  max-width: 235px;
+  min-width: 235px;
+}
+
+.card {
+  text-align: center;
+  border-radius: 2%;
+  padding: 1rem;
+  margin: 0.05rem;
+  margin-bottom: 0.4rem;
+  width: 200px;
+  height: 50px;
+  background-color: white;
+  box-shadow: 0 1px 1px #888888;
+  transition: filter 0.1s ease;
+}
+
+.card:hover {
+  filter: brightness(97%);
+}
+
+.btn {
+  display: inline-block;
+  position: relative;
+  border: none;
+  border-radius: 2%;
+  height: 20px;
+  width: 235px;
+  cursor: pointer;
+}
+
+.board-btn {
+  background-color: rgba(151, 151, 151, 0.4);
+  padding: 0.25rem;
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+}
+
+.card-btn {
+  background-color: rgb(228, 228, 228);
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+.btn-text {
+  color: gray;
+  font-size: 1rem;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
