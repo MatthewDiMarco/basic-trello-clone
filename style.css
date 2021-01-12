@@ -40,10 +40,6 @@ body {
   display: auto;
 }
 
-.draggable {
-  cursor: pointer;
-}
-
 .draggable.dragging {
   color: transparent; /*text invisible*/;
   opacity: 0.4;
@@ -55,8 +51,12 @@ body {
 }
 
 .topbar {
+  position: fixed;
   width: 100vw;
-  height: 50px;
+  height: 95px;
+  top: 0;
+  background-color: #0f0f0f;
+  opacity: 0.1;
 }
 
 .board-content {
@@ -89,7 +89,7 @@ body {
 }
 
 .card {
-  text-align: center;
+  white-space: wrap;
   border-radius: 2%;
   padding: 1rem;
   margin: 0.05rem;
@@ -113,19 +113,38 @@ body {
   height: 20px;
   width: 235px;
   cursor: pointer;
+  transition: filter 0.1s ease;
+}
+
+.btn:hover {
+  filter: brightness(90%);
 }
 
 .board-btn {
   background-color: rgba(151, 151, 151, 0.4);
   padding: 0.25rem;
-  margin-left: 0.4rem;
+  margin-left: 0.1rem;
   margin-right: 0.4rem;
 }
 
-.card-btn {
+.list-btn {
   background-color: rgb(228, 228, 228);
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
+}
+
+.trash-btn {
+  position: fixed;
+  top: 10px;
+  border-radius: 3%;
+  padding: 1rem;
+  margin: 0.5rem;
+  background-color: rgb(255, 122, 89);
+  box-shadow: 0 1px 1px rgb(182, 69, 41);
+}
+
+.trash-btn:hover {
+  filter: brightness(90%);
 }
 
 .btn-text {
