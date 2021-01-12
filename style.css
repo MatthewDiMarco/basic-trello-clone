@@ -89,6 +89,7 @@ body {
 }
 
 .card {
+  white-space: wrap;
   border-radius: 2%;
   padding: 1rem;
   margin: 0.05rem;
@@ -122,11 +123,11 @@ body {
 .board-btn {
   background-color: rgba(151, 151, 151, 0.4);
   padding: 0.25rem;
-  margin-left: 0.4rem;
+  margin-left: 0.1rem;
   margin-right: 0.4rem;
 }
 
-.card-btn {
+.list-btn {
   background-color: rgb(228, 228, 228);
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;

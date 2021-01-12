@@ -1,61 +1,42 @@
-/**
- * TODO
- * - add and remove buttons for lists and cards
- * - input fields, basic card screen
- * - Threshold width/height value when drag sorting elements
- * - BONUS: sexy shuffle animations???
- */
+$(document).ready(init);
 
-const draggables = document.querySelectorAll('.draggable'); 
-const containers = document.querySelectorAll('.container');
-const cardbuttons = document.querySelectorAll('.card-btn');
-const boardbutton = document.querySelector('.board-btn'); 
-const trashbutton = document.querySelector('.trash-btn');
+function init() {
+  const boardbutton = document.querySelector('.board-btn'); 
+  const trashbutton = document.querySelector('.trash-btn');
+  const listcontainer = document.querySelector('.container-horizontal');
 
-$('body, html').mousedown(function(e) { e.preventDefault(); });
+  //$('body, html').mousedown(function(e) { e.preventDefault(); });
 
-trashbutton.addEventListener('mouseup', e => {
-  let draggable = document.querySelector('.dragging');
-  if (draggable != null) {
-    $(draggable).remove();
-    document.body.removeChild(document.querySelector('.drag-ghost'));
-  }
-});
-
-boardbutton.addEventListener('click', e => {
-  createList(document.querySelector('.container-horizontal'));
-})
-
-cardbuttons.forEach(b => {
-  b.addEventListener('click', e => {
-    console.log('hit');
-    //crate new card function
+  boardbutton.addEventListener('click', e => {
+    createList(listcontainer);
+  }); 
+  
+  trashbutton.addEventListener('mouseup', e => {
+    let draggable = document.querySelector('.dragging');
+    if (draggable != null) {
+      $(draggable).remove();
+      document.body.removeChild(document.querySelector('.drag-ghost'));
+    }
   });
-});
 
-window.addEventListener('mousemove', e => {
-  moveGhost(e.pageX, e.pageY);
-});
-
-window.addEventListener('mouseup', e => {
-  let draggable = document.querySelector('.dragging');
-  if (draggable != null) {
-    draggable.classList.remove('dragging');
-    document.body.removeChild(document.querySelector('.drag-ghost'));
-  }
-});
-
-draggables.forEach(draggable => {
-  draggable.addEventListener('mousedown', e => {
-    draggableMouseDownHandler(draggable, e);
+  listcontainer.addEventListener('mouseover', e => {
+    containerMouseOverHandler(listcontainer, e);
   });
-});
 
-containers.forEach(container => {
-  container.addEventListener('mouseover', e => {
-    containerMouseOverHandler(container, e); 
+  window.addEventListener('mousemove', e => {
+    moveGhost(e.pageX, e.pageY);
   });
-});
+  
+  window.addEventListener('mouseup', e => {
+    let draggable = document.querySelector('.dragging');
+    if (draggable != null) {
+      draggable.classList.remove('dragging');
+      document.body.removeChild(document.querySelector('.drag-ghost'));
+    }
+  });
+
+  createList(listcontainer);
+}
 
 function getDragAfterElement(container, coord, offsetFunction) {
   const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
@@ -103,18 +84,18 @@ function createList(container) {
   const listContent = document.createElement('div');
   const listHeader = document.createElement('div');
   const listCards = document.createElement('div');
-  const cardBtn = document.createElement('div');
-  const cardBtnTxt = document.createElement('div');
+  const listBtn = document.createElement('div');
+  const listBtnTxt = document.createElement('div');
 
   listWrapper.classList = 'draggable listwrapper';
   listContent.classList = 'list-content';
   listHeader.classList = 'list-header';
-  listHeader.innerHTML = 'Header';
+  listHeader.innerHTML = 'List';
   listCards.classList = 'container container-vertical list-cards';
   listCards.setAttribute('data-droptypes', 'card'); 
-  cardBtn.classList = 'btn card-btn';
-  cardBtnTxt.classList = 'btn-text';
-  cardBtnTxt.innerHTML = '+ Add card';
+  listBtn.classList = 'btn list-btn';
+  listBtnTxt.classList = 'btn-text';
+  listBtnTxt.innerHTML = '+ Add card';
 
   listWrapper.addEventListener('mousedown', e => {
     draggableMouseDownHandler(listWrapper, e);
@@ -124,14 +105,14 @@ function createList(container) {
     containerMouseOverHandler(listCards, e); 
   });
 
-  cardBtn.addEventListener('click', e => {
+  listBtn.addEventListener('click', e => {
     createCard(listCards);
   });
 
   listContent.appendChild(listHeader);
   listContent.appendChild(listCards);
-  cardBtn.appendChild(cardBtnTxt);
-  listContent.appendChild(cardBtn);
+  listBtn.appendChild(listBtnTxt);
+  listContent.appendChild(listBtn);
   listWrapper.appendChild(listContent);
 
   container.appendChild(listWrapper);
@@ -139,8 +120,9 @@ function createList(container) {
 
 function createCard(container) {
   const cardDiv = document.createElement('div');
+
   cardDiv.classList = 'draggable card';
-  cardDiv.innerHTML = 'Enter card title here...';
+  cardDiv.innerHTML = 'Card';
 
   cardDiv.addEventListener('mousedown', e => {
     draggableMouseDownHandler(cardDiv, e);
@@ -151,7 +133,6 @@ function createCard(container) {
 
 function draggableMouseDownHandler(draggable, e) {
   e.preventDefault();
-  e.stopPropagation();
   let safeToDrag = false;
   if (draggable.classList.contains('listwrapper')) {
     const h = draggable.querySelector('.list-header');
